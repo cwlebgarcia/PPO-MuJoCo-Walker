@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.distributions.normal import Normal
 import numpy as np
 
+# Critic Network
 class ValueFunction(nn.Module):
     def __init__(self, xdim, hdim=64):
         super().__init__()
@@ -16,7 +17,7 @@ class ValueFunction(nn.Module):
         
     def forward(s,x):
         return torch.squeeze(s.v_net(x),-1)
-    
+
 class uth_t(nn.Module):
     def __init__(s,xdim,udim,
                  hdim=64,fixed_var = True):
@@ -24,6 +25,7 @@ class uth_t(nn.Module):
         s.xdim,s.udim = xdim, udim
         s.fixed_var = fixed_var
 
+        # Actor network
         ### TODO
         s.q_net = nn.Sequential(
                     nn.Linear(xdim, hdim),
